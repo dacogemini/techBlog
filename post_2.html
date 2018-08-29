@@ -59,10 +59,10 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
-              <h2>Learn Node.js by Playing 'Hangman'</h2>
-              <h4 class="subheading">What the age-old game can teach us about code</h4>
+                <h2>If you have the question, Node's <em>readline</em> module has the answer.</h2>
+              <h4 class="subheading">How to ask questions in Node.js</h4>
               <span class="meta">Posted by
-                <a href="#">Start Bootstrap</a>
+                <a href="#">Dan Collins</a>
                 on August 24, 2018</span>
             </div>
           </div>
@@ -75,23 +75,80 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <p>The example I am going to use is based on a 'Hangman' game written completely in Node.js.
-              I chose this example because it uses a lot of Node concepts and allows the reader to see a 'real-life' 
-              example of server-side Javascript in action. 
-            <a href="https://github.com/dacogemini/hangman_node_version">The Github repo can be found here</a>  
+            <p>One of the more useful functionalities of Node's <em>readline</em> module is the 
+            ability to ask a question and receive an answer. What's more, the answer is returned in 
+            the callback function! How cool is that? 
             </p>
             
-            <p>The first concept I'll cover is how to work with inputs in Node.js. 
-              There are a number of ways to work with inputs in Node.js. One way is to use the <em>readline</em> module.  </p>
-            <p>Let's break down the first part of the code in the <a href="https://github.com/dacogemini/hangman_node_version/blob/master/index.js">index.js</a> file</p>
+            <p>Let's have fun with this, shall we?</p>
+            <p>First let's make a directory named <em>questions</em></p>
+            <p>In your terminal type <em style='font-family: Oxygen Mono, monospace;'>mkdir questions</em> 
+            </p>
+            <p>Next, <em style='font-family: Oxygen Mono, monospace;'>cd questions</em> </p>
+            <p>Once in the questions directory, create a file named as-example.js: <br>
+                <br>
+                <em style='font-family: Oxygen Mono, monospace;'>touch as-example.js</em>
+            </p>
+            <p class="caption">
+                Notes on <em>async:</em>
+                <ol class='caption'>
+                <li>
+                The NPM package async is optimized for Node.js. If you use async with webpack, 
+                please install <em style='font-family: Oxygen Mono, monospace;'>async-es</em> instead.
+                </li>
+                <br>
+                <li>
+                Due to JavaScript limitations, we can only detect native async functions and 
+                not transpilied implementations. Your environment must have <em>async/await</em> support 
+                for this to work. (e.g. Node > v7.6, or a recent version of a modern browser). If you are using async functions through a transpiler (e.g. Babel), you must still wrap the function with asyncify, because the async function will be compiled to an ordinary function that returns a promise.
+                </li>
+                </ol>
+            </p>
             
-            
+            I need to iterate over a collection, perform an asynchronous task for each item, and when they’re all done do something else
+                <p style='font-family: Oxygen Mono, monospace;'>
+                var readline = require('readline'),<br>
+                async = require("async"),<br>
+                fs = require('fs');<br>
+            <p>Once your file is created and your dependencies installed, we can go to our <em style='font-family: Oxygen Mono, monospace;'>as-example.js</em> 
+            file and require <em>readline, async,</em> and our file system <em>fs</em>
+            </p>
+            <p>At this point we can create some questions to ask the program user. We'll
+                create an array of questions like so:
+            </p>
             <p style='font-family: Oxygen Mono, monospace;'>
-              const readline = require('readline');<br>  
-              const rl = readline.createInterface({ <br>
-              &nbsp &nbsp input: process.stdin, <br>
-              &nbsp &nbsp output: process.stdout <br>
-                });</p>
+             var questions = [ "What's your favorite color? ",
+                              "What's your favorite server-side language? ",
+                              "Monty Python or Kids in the Hall? ",
+                              "Doctor Who or Doctor who? " ];
+            </p>
+            <p>Now with our array set, let's create and turn on our <em>readline</em> interface:</p>
+            <p style='font-family: Oxygen Mono, monospace;'>
+            var rl = readline.createInterface({  <br>               
+            &nbsp &nbsp input: process.stdin, <br>
+            &nbsp &nbsp output: process.stdout <br>
+            });
+            </p>
+             var output = [];
+            async.forEachSeries(
+                questions,
+                function (item, cb) {                              // 2.
+                    rl.question(item, function (answer) {
+                        output.push(answer);
+                        cb(null);
+                    });
+                },
+                function (err) {                                   // 3.
+                    if (err) {
+                        console.log("Hunh, couldn't get answers");
+                        console.log(err);
+                        return;
+                    }
+                    fs.appendFileSync("answers.txt", JSON.stringify(output) + "\n");
+                    console.log("\nThanks for your answers!");
+                    console.log("We'll sell them to some telemarketer immediately!");
+                    rl.close();
+            </p>
                 <h4 style='font-family: BenchNine' sans-serif;'> Require Module:</h4>
                 <p style='font-family: Oxygen Mono, monospace;'>const readline = require('readline');</p>
                 <h4 style='font-family: BenchNine' sans-serif;'> Turn it on:</h4>
@@ -198,3 +255,4 @@
   </body>
 
 </html>
+ 

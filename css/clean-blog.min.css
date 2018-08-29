@@ -47,14 +47,15 @@ blockquote {
 }
 
 .caption {
-    font-size: 14px;
+    font-size: 19px;
     font-style: italic;
     display: block;
-    margin: 0;
+    color: #868e96;
+    /* margin: 0;
     padding: 10px;
     text-align: center;
     border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px
+    border-bottom-left-radius: 5px */
 }
 
 ::-moz-selection {
@@ -189,10 +190,10 @@ header.masthead {
     background-color: #0c2136;
     background-attachment: scroll;
     position: relative;
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 80%;
 }
 
 /* header.masthead .overlay {
