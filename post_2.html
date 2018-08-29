@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,233 +16,264 @@
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
 
-  </head>
+</head>
 
-  <body>
+<body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">HOME</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fa fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="post.html">Sample Post</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-          </ul>
+        <div class="container">
+            <a class="navbar-brand" href="index.html">HOME</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="post.html">Sample Post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!-- Page Header -->
     <header class="masthead" style="background-image: url('#')">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="post-heading">
-                <h2>If you have the question, Node's <em>readline</em> module has the answer.</h2>
-              <h4 class="subheading">How to ask questions in Node.js</h4>
-              <span class="meta">Posted by
-                <a href="#">Dan Collins</a>
-                on August 24, 2018</span>
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h2>If you have the question, Node's <em>readline</em> module has the answer.</h2>
+                        <h4 class="subheading">How to ask questions in Node.js</h4>
+                        <span class="meta">Posted by
+                            <a href="#">Dan Collins</a>
+                            on August 24, 2018</span>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </header>
 
     <!-- Post Content -->
     <article>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <p>One of the more useful functionalities of Node's <em>readline</em> module is the 
-            ability to ask a question and receive an answer. What's more, the answer is returned in 
-            the callback function! How cool is that? 
-            </p>
-            
-            <p>Let's have fun with this, shall we?</p>
-            <p>First let's make a directory named <em>questions</em></p>
-            <p>In your terminal type <em style='font-family: Oxygen Mono, monospace;'>mkdir questions</em> 
-            </p>
-            <p>Next, <em style='font-family: Oxygen Mono, monospace;'>cd questions</em> </p>
-            <p>Once in the questions directory, create a file named as-example.js: <br>
-                <br>
-                <em style='font-family: Oxygen Mono, monospace;'>touch as-example.js</em>
-            </p>
-            <p class="caption">
-                Notes on <em>async:</em>
-                <ol class='caption'>
-                <li>
-                The NPM package async is optimized for Node.js. If you use async with webpack, 
-                please install <em style='font-family: Oxygen Mono, monospace;'>async-es</em> instead.
-                </li>
-                <br>
-                <li>
-                Due to JavaScript limitations, we can only detect native async functions and 
-                not transpilied implementations. Your environment must have <em>async/await</em> support 
-                for this to work. (e.g. Node > v7.6, or a recent version of a modern browser). If you are using async functions through a transpiler (e.g. Babel), you must still wrap the function with asyncify, because the async function will be compiled to an ordinary function that returns a promise.
-                </li>
-                </ol>
-            </p>
-            
-            I need to iterate over a collection, perform an asynchronous task for each item, and when they’re all done do something else
-                <p style='font-family: Oxygen Mono, monospace;'>
-                var readline = require('readline'),<br>
-                async = require("async"),<br>
-                fs = require('fs');<br>
-            <p>Once your file is created and your dependencies installed, we can go to our <em style='font-family: Oxygen Mono, monospace;'>as-example.js</em> 
-            file and require <em>readline, async,</em> and our file system <em>fs</em>
-            </p>
-            <p>At this point we can create some questions to ask the program user. We'll
-                create an array of questions like so:
-            </p>
-            <p style='font-family: Oxygen Mono, monospace;'>
-             var questions = [ "What's your favorite color? ",
-                              "What's your favorite server-side language? ",
-                              "Monty Python or Kids in the Hall? ",
-                              "Doctor Who or Doctor who? " ];
-            </p>
-            <p>Now with our array set, let's create and turn on our <em>readline</em> interface:</p>
-            <p style='font-family: Oxygen Mono, monospace;'>
-            var rl = readline.createInterface({  <br>               
-            &nbsp &nbsp input: process.stdin, <br>
-            &nbsp &nbsp output: process.stdout <br>
-            });
-            </p>
-             var output = [];
-            async.forEachSeries(
-                questions,
-                function (item, cb) {                              // 2.
-                    rl.question(item, function (answer) {
-                        output.push(answer);
-                        cb(null);
-                    });
-                },
-                function (err) {                                   // 3.
-                    if (err) {
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>One of the more useful functionalities of Node's <em>readline</em> module is the
+                        ability to ask a question and receive an answer. What's more, the answer is returned in
+                        the callback function! How cool is that?
+                    </p>
+
+                    <p>Let's have fun with this, shall we?</p>
+                    <p>First let's make a directory named <em>questions</em></p>
+                    <p>In your terminal type <em style='font-family: Oxygen Mono, monospace;'>mkdir questions</em>
+                    </p>
+                    <p>Next, <em style='font-family: Oxygen Mono, monospace;'>cd questions</em> </p>
+                    <p>Once in the questions directory, create a file named as-example.js: <br>
+                        <br>
+                        <em style='font-family: Oxygen Mono, monospace;'>touch as-example.js</em>
+                    </p>
+                    <p class="caption">
+                        Notes on <em>async:</em>
+                        <ol class='caption'>
+                            <li>
+                                The NPM package async is optimized for Node.js. If you use async with webpack,
+                                please install <em style='font-family: Oxygen Mono, monospace;'>async-es</em> instead.
+                            </li>
+                            <br>
+                            <li>
+                                Due to JavaScript limitations, we can only detect native async functions and
+                                not transpilied implementations. Your environment must have <em>async/await</em>
+                                support
+                                for this to work. (e.g. Node > v7.6, or a recent version of a modern browser). If you
+                                are using async functions through a transpiler (e.g. Babel), you must still wrap the
+                                function with asyncify, because the async function will be compiled to an ordinary
+                                function that returns a promise.
+                            </li>
+                        </ol>
+                    </p>
+                    <p style='font-family: Oxygen Mono, monospace;'>
+                        var readline = require('readline'),<br>
+                        async = require("async"),<br>
+                        fs = require('fs');<br>
+                        <p>Once your file is created and your dependencies installed, we can go to our <em style='font-family: Oxygen Mono, monospace;'>as-example.js</em>
+                            file and require <em>readline, async,</em> and our file system <em>fs</em>
+                        </p>
+                        <p>At this point we can create some questions to ask the program user. We'll
+                            create an array of questions like so:
+                        </p>
+                        <p style='font-family: Oxygen Mono, monospace;'>
+                            var questions = [ "What's your favorite color? ",
+                            "What's your favorite server-side language? ",
+                            "Monty Python or Kids in the Hall? ",
+                            "Doctor Who or Doctor who? " ];
+                        </p>
+                        <p>Now with our array set, let's create and turn on our <em>readline</em> interface:</p>
+                        <p style='font-family: Oxygen Mono, monospace;'>
+                            var rl = readline.createInterface({ <br>
+                            &nbsp &nbsp input: process.stdin, <br>
+                            &nbsp &nbsp output: process.stdout <br>
+                            });
+                        </p>
+                        <p>Let's create an empty array to store our output</p>
+                        <p style='font-family: Oxygen Mono, monospace;'>
+                            var output = [];
+                        </p>
+                        <p>Before we iterate over our question array, let's take a moment to
+                            discuss Node's <em>async</em> package.
+                        </p>
+                        <p>At this point, the question we need to ask ourselves is,
+                            <em>do I need to iterate over a collection, perform an asynchronous task for each item, and
+                                when they’re all done do something else?</em>
+                                If the answer is yes (and in our case it is) then we should use <em>async.forEach.</em>
+                        </p>
+                        <p>Below, we do just that.</p>
+
+                        <p class='caption'> An interesting side-note. Another example of when to use <em>async.forEach</em> could be a webservice where you support deleting multiple messages in one request. You get the message IDs as a comma separated string in the URL. Each deletion requires a separate call to the database. When all deletions have completed you want to reply the user with a response.
+
+                        <p style='font-family: Oxygen Mono, monospace;'>
+                        async.forEachSeries(questions, function (item, cb) { <br>
+                        &nbsp &nbsp rl.question(item, function (answer) { <br>
+                        &nbsp &nbsp &nbsp output.push(answer); <br>
+                        &nbsp &nbsp &nbsp &nbsp cb(null); <br>
+                        }); <br>
+                        },
+                        </p>
+                        <p>Phew! That was a lot! We'll go through it line-byline</p>
+                        function (err) { // 3.
+                        if (err) {
                         console.log("Hunh, couldn't get answers");
                         console.log(err);
                         return;
-                    }
-                    fs.appendFileSync("answers.txt", JSON.stringify(output) + "\n");
-                    console.log("\nThanks for your answers!");
-                    console.log("We'll sell them to some telemarketer immediately!");
-                    rl.close();
-            </p>
-                <h4 style='font-family: BenchNine' sans-serif;'> Require Module:</h4>
-                <p style='font-family: Oxygen Mono, monospace;'>const readline = require('readline');</p>
-                <h4 style='font-family: BenchNine' sans-serif;'> Turn it on:</h4>
-                <p>Next, we have to turn on the readline module. This also creates an readline interface instance.</p>
-                <p style='font-family: Oxygen Mono, monospace;'>
-                    const rl = readline.createInterface({ <br>
-                    &nbsp &nbsp input: process.stdin, <br>
-                    &nbsp &nbsp output: process.stdout <br>
-                      });</p>
-              <p>Ok so far, so good. Now here is where things git a bit tricky. When learning programming concepts it's 
-                easy to get side-tracked, but I promise once we go down this 'rabbit-hole' we will get back to reading and processing
-                input in a simpler fashion.  
-              </p>
-              <p>In our readline instance, we make use of another module, the <em>process</em> module. </p>
-              <p style='font-family: Oxygen Mono, monospace;'>
-                  &nbsp &nbsp input: process.stdin, <br>
-                  &nbsp &nbsp output: process.stdout <br>
-              </p>
-              <p>We know that single threaded operations make Node.js processes more efficient and faster. 
-                We also know that most servers have multiple processors. We can easily leverage the extra processors to  
-                run our code in parallel with each other and the main application. 
-                Node.js offers three specific modules to help with this. 
-                <ol>
-                  <li style='font-family: Oxygen Mono, monospace;'> process Module</li>
-                  <li style='font-family: Oxygen Mono, monospace;'>The child_process Module</li>
-                  <li style='font-family: Oxygen Mono, monospace;'>The cluster Module</li>
-                </ol>
-                The <span style='font-family: Oxygen Mono, monospace;'>process</span> module provides access to the running processes. The <span style='font-family: Oxygen Mono, monospace;'>child_process </span>module provides the ability to create child processes and communicate with them. And <span style='font-family: Oxygen Mono, monospace;'> cluster </span>module implements clustered servers that share the same port, thus allowing multiple requests to be handled simultaneously.
-               </p>
+                        }
+                        fs.appendFileSync("answers.txt", JSON.stringify(output) + "\n");
+                        console.log("\nThanks for your answers!");
+                        console.log("We'll sell them to some telemarketer immediately!");
+                        rl.close();
+                    </p>
+                    <h4 style='font-family: BenchNine' sans-serif;'> Require Module:</h4>
+                    <p style='font-family: Oxygen Mono, monospace;'>const readline = require('readline');</p>
+                    <h4 style='font-family: BenchNine' sans-serif;'> Turn it on:</h4>
+                    <p>Next, we have to turn on the readline module. This also creates an readline interface instance.</p>
+                    <p style='font-family: Oxygen Mono, monospace;'>
+                        const rl = readline.createInterface({ <br>
+                        &nbsp &nbsp input: process.stdin, <br>
+                        &nbsp &nbsp output: process.stdout <br>
+                        });</p>
+                    <p>Ok so far, so good. Now here is where things git a bit tricky. When learning programming
+                        concepts it's
+                        easy to get side-tracked, but I promise once we go down this 'rabbit-hole' we will get back to
+                        reading and processing
+                        input in a simpler fashion.
+                    </p>
+                    <p>In our readline instance, we make use of another module, the <em>process</em> module. </p>
+                    <p style='font-family: Oxygen Mono, monospace;'>
+                        &nbsp &nbsp input: process.stdin, <br>
+                        &nbsp &nbsp output: process.stdout <br>
+                    </p>
+                    <p>We know that single threaded operations make Node.js processes more efficient and faster.
+                        We also know that most servers have multiple processors. We can easily leverage the extra
+                        processors to
+                        run our code in parallel with each other and the main application.
+                        Node.js offers three specific modules to help with this.
+                        <ol>
+                            <li style='font-family: Oxygen Mono, monospace;'> process Module</li>
+                            <li style='font-family: Oxygen Mono, monospace;'>The child_process Module</li>
+                            <li style='font-family: Oxygen Mono, monospace;'>The cluster Module</li>
+                        </ol>
+                        The <span style='font-family: Oxygen Mono, monospace;'>process</span> module provides access to
+                        the running processes. The <span style='font-family: Oxygen Mono, monospace;'>child_process
+                        </span>module provides the ability to create child processes and communicate with them. And
+                        <span style='font-family: Oxygen Mono, monospace;'> cluster </span>module implements clustered
+                        servers that share the same port, thus allowing multiple requests to be handled simultaneously.
+                    </p>
 
-            <a href="#">
-              <img class="img-fluid" src="img/process.png" alt="Event Loop">
-            </a>
-            <span class="caption text-muted">The <em>Event Loop</em> in Node.js.</span>
-            <p>Once the readline.Interface instance is created, the most common case is to listen for the 'line' event:</p>
-            <p>We do exactly this on <em>line 32</em> in our <a href="https://github.com/dacogemini/hangman_node_version/blob/master/index.js">Github repo</a></p>
-            <p style='font-family: Oxygen Mono, monospace;'>
-            rl.on("line", (input) => {  <br>
-            <span class="caption">
-            &nbsp &nbsp var entry = input.toUpperCase(); <br>
-            &nbsp &nbsp &nbsp &nbsp if (entry == "QUIT" || entry == "NO")</span> 
-              { 
-                  <br> rl.close(); 
-                  <br>
-                  <span class="caption">// Note: our program will not exit until close() is called <br></span>
-              }
-              </p>
-              <h4 style='font-family: BenchNine' sans-serif;'> Line Event:</h4>
-              The 'line' envent is emitted whenever the in stream receives a <em style='font-family: Oxygen Mono, monospace;'>\n </em>, usually received when the user hits enter, or return.
-          <p class="caption">If you would like to know more about the readline module, stay-tuned. I am working on a blog post in which I show you how to 
-            make a <em>'Polish Notation'</em> calculator with the readline module. 
-          </p>
-          </div>
+                    <a href="#">
+                        <img class="img-fluid" src="img/process.png" alt="Event Loop">
+                    </a>
+                    <span class="caption text-muted">The <em>Event Loop</em> in Node.js.</span>
+                    <p>Once the readline.Interface instance is created, the most common case is to listen for the
+                        'line' event:</p>
+                    <p>We do exactly this on <em>line 32</em> in our <a href="https://github.com/dacogemini/hangman_node_version/blob/master/index.js">Github
+                            repo</a></p>
+                    <p style='font-family: Oxygen Mono, monospace;'>
+                        rl.on("line", (input) => { <br>
+                        <span class="caption">
+                            &nbsp &nbsp var entry = input.toUpperCase(); <br>
+                            &nbsp &nbsp &nbsp &nbsp if (entry == "QUIT" || entry == "NO")</span>
+                        {
+                        <br> rl.close();
+                        <br>
+                        <span class="caption">// Note: our program will not exit until close() is called <br></span>
+                        }
+                    </p>
+                    <h4 style='font-family: BenchNine' sans-serif;'> Line Event:</h4>
+                    The 'line' envent is emitted whenever the in stream receives a <em style='font-family: Oxygen Mono, monospace;'>\n
+                    </em>, usually received when the user hits enter, or return.
+                    <p class="caption">If you would like to know more about the readline module, stay-tuned. I am
+                        working on a blog post in which I show you how to
+                        make a <em>'Polish Notation'</em> calculator with the readline module.
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </article>
 
     <hr>
 
     <!-- Footer -->
     <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <ul class="list-inline text-center">
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-            </ul>
-            <p class="copyright text-muted">Copyright &copy; Your Website 2018</p>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2018</p>
+                </div>
+            </div>
         </div>
-      </div>
     </footer>
 
     <!-- Bootstrap core JavaScript -->
@@ -252,7 +283,6 @@
     <!-- Custom scripts for this template -->
     <script src="js/clean-blog.min.js"></script>
 
-  </body>
+</body>
 
 </html>
- 
