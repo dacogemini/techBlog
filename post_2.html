@@ -102,8 +102,7 @@
                             <li>
                                 Due to JavaScript limitations, we can only detect native async functions and
                                 not transpilied implementations. Your environment must have <em>async/await</em>
-                                support
-                                for this to work. (e.g. Node > v7.6, or a recent version of a modern browser). If you
+                                support for this to work. (e.g. Node > v7.6, or a recent version of a modern browser). If you
                                 are using async functions through a transpiler (e.g. Babel), you must still wrap the
                                 function with asyncify, because the async function will be compiled to an ordinary
                                 function that returns a promise.
@@ -115,16 +114,16 @@
                         async = require("async"),<br>
                         fs = require('fs');<br>
                         <p>Once your file is created and your dependencies installed, we can go to our <em style='font-family: Oxygen Mono, monospace;'>as-example.js</em>
-                            file and require <em>readline, async,</em> and our file system <em>fs</em>
+                            file and require <em>readline, async,</em> and our file system <em>fs</em> as we've done above.
                         </p>
                         <p>At this point we can create some questions to ask the program user. We'll
                             create an array of questions like so:
                         </p>
                         <p style='font-family: Oxygen Mono, monospace;'>
-                            var questions = [ "What's your favorite color? ",
-                            "What's your favorite server-side language? ",
-                            "Monty Python or Kids in the Hall? ",
-                            "Doctor Who or Doctor who? " ];
+                            var questions = ["What's your favorite color?",
+                            "What's your favorite server-side language?",
+                            "Monty Python or Kids in the Hall?",
+                            "Doctor Who or Doctor who?"];
                         </p>
                         <p>Now with our array set, let's create and turn on our <em>readline</em> interface:</p>
                         <p style='font-family: Oxygen Mono, monospace;'>
@@ -143,95 +142,57 @@
                         <p>At this point, the question we need to ask ourselves is,
                             <em>do I need to iterate over a collection, perform an asynchronous task for each item, and
                                 when they’re all done do something else?</em>
-                                If the answer is yes (and in our case it is) then we should use <em>async.forEach.</em>
+                            If the answer is yes (and in our case it is) then we should use <em>async.forEach.</em>
                         </p>
                         <p>Below, we do just that.</p>
 
-                        <p class='caption'> An interesting side-note. Another example of when to use <em>async.forEach</em> could be a webservice where you support deleting multiple messages in one request. You get the message IDs as a comma separated string in the URL. Each deletion requires a separate call to the database. When all deletions have completed you want to reply the user with a response.
+                        <p class='caption'> An interesting side-note. Another example of when to use <em>async.forEach</em>
+                            could be a webservice where you support deleting multiple messages in one request. You get
+                            the message IDs as a comma separated string in the URL. Each deletion requires a separate
+                            call to the database. When all deletions have completed you want to reply the user with a
+                            response. Ok, back to our current example...
 
-                        <p style='font-family: Oxygen Mono, monospace;'>
-                        async.forEachSeries(questions, function (item, cb) { <br>
-                        &nbsp &nbsp rl.question(item, function (answer) { <br>
-                        &nbsp &nbsp &nbsp output.push(answer); <br>
-                        &nbsp &nbsp &nbsp &nbsp cb(null); <br>
-                        }); <br>
-                        },
+                            <p style='font-family: Oxygen Mono, monospace;'>
+                                async.forEachSeries(questions, function (item, cb) { <br>
+                                &nbsp &nbsp rl.question(item, function (answer) { <br>
+                                &nbsp &nbsp &nbsp output.push(answer); <br>
+                                &nbsp &nbsp &nbsp &nbsp cb(null); <br>
+                                &nbsp }); <br>
+                                }),
+                            </p>
+                            <p>Phew! That was a lot! We'll go through it line-byline</p>
+                            <p>We iterate through each question in the array.
+                                <p style='font-family: Oxygen Mono, monospace;'>
+                                    async.forEachSeries(questions, function (item, cb) { ... </p>
+                                <p>Then for each question in the array, we call the <em>question</em>
+                                function on <em>readline</em>, name the entered response, 'answer', and add the result to our empty <em>output</em> array
+                                </p>
+                                <p style='font-family: Oxygen Mono, monospace;'>
+                                rl.question(item, function (answer) { <br>
+                                &nbsp &nbsp output.push(answer); <br>
+                                &nbsp &nbsp cb = (<em>null</em>);
+                                </p>
+                            <p>Next we handle an errors we may have: </p>
+                            <p style='font-family: Oxygen Mono, monospace;'>
+                                    function (err) { <br>
+                                    &nbsp &nbsp if (err) { <br>
+                                    &nbsp &nbsp &nbsp console.log("Hmmm, couldn't get answers"); <br>
+                                    &nbsp &nbsp &nbsp console.log(err); <br>
+                                    &nbsp &nbsp &nbsp &nbsp return; <br>
+                                        } ... </p>
+                              
+                            <p>We can now create a text file called 'answers' (<em>answers.txt</em>) and add the users
+                            responses to this file. Next we send a message to the user, change the object to a <em>string</em> and close out <em>readline</em></p>
+                            <p style='font-family: Oxygen Mono, monospace;'>
+                            fs.appendFileSync("answers.txt", JSON.stringify(output) + "\n"); <br>
+                            &nbsp &nbsp console.log("\n Thanks for your answers!"); <br>
+                            &nbsp &nbsp console.log("We'll will review your answers shortly."); <br>
+                            &nbsp &nbsp rl.close(); <br>
+                            });
                         </p>
-                        <p>Phew! That was a lot! We'll go through it line-byline</p>
-                        function (err) { // 3.
-                        if (err) {
-                        console.log("Hunh, couldn't get answers");
-                        console.log(err);
-                        return;
-                        }
-                        fs.appendFileSync("answers.txt", JSON.stringify(output) + "\n");
-                        console.log("\nThanks for your answers!");
-                        console.log("We'll sell them to some telemarketer immediately!");
-                        rl.close();
-                    </p>
-                    <h4 style='font-family: BenchNine' sans-serif;'> Require Module:</h4>
-                    <p style='font-family: Oxygen Mono, monospace;'>const readline = require('readline');</p>
-                    <h4 style='font-family: BenchNine' sans-serif;'> Turn it on:</h4>
-                    <p>Next, we have to turn on the readline module. This also creates an readline interface instance.</p>
-                    <p style='font-family: Oxygen Mono, monospace;'>
-                        const rl = readline.createInterface({ <br>
-                        &nbsp &nbsp input: process.stdin, <br>
-                        &nbsp &nbsp output: process.stdout <br>
-                        });</p>
-                    <p>Ok so far, so good. Now here is where things git a bit tricky. When learning programming
-                        concepts it's
-                        easy to get side-tracked, but I promise once we go down this 'rabbit-hole' we will get back to
-                        reading and processing
-                        input in a simpler fashion.
-                    </p>
-                    <p>In our readline instance, we make use of another module, the <em>process</em> module. </p>
-                    <p style='font-family: Oxygen Mono, monospace;'>
-                        &nbsp &nbsp input: process.stdin, <br>
-                        &nbsp &nbsp output: process.stdout <br>
-                    </p>
-                    <p>We know that single threaded operations make Node.js processes more efficient and faster.
-                        We also know that most servers have multiple processors. We can easily leverage the extra
-                        processors to
-                        run our code in parallel with each other and the main application.
-                        Node.js offers three specific modules to help with this.
-                        <ol>
-                            <li style='font-family: Oxygen Mono, monospace;'> process Module</li>
-                            <li style='font-family: Oxygen Mono, monospace;'>The child_process Module</li>
-                            <li style='font-family: Oxygen Mono, monospace;'>The cluster Module</li>
-                        </ol>
-                        The <span style='font-family: Oxygen Mono, monospace;'>process</span> module provides access to
-                        the running processes. The <span style='font-family: Oxygen Mono, monospace;'>child_process
-                        </span>module provides the ability to create child processes and communicate with them. And
-                        <span style='font-family: Oxygen Mono, monospace;'> cluster </span>module implements clustered
-                        servers that share the same port, thus allowing multiple requests to be handled simultaneously.
-                    </p>
-
-                    <a href="#">
-                        <img class="img-fluid" src="img/process.png" alt="Event Loop">
-                    </a>
-                    <span class="caption text-muted">The <em>Event Loop</em> in Node.js.</span>
-                    <p>Once the readline.Interface instance is created, the most common case is to listen for the
-                        'line' event:</p>
-                    <p>We do exactly this on <em>line 32</em> in our <a href="https://github.com/dacogemini/hangman_node_version/blob/master/index.js">Github
-                            repo</a></p>
-                    <p style='font-family: Oxygen Mono, monospace;'>
-                        rl.on("line", (input) => { <br>
-                        <span class="caption">
-                            &nbsp &nbsp var entry = input.toUpperCase(); <br>
-                            &nbsp &nbsp &nbsp &nbsp if (entry == "QUIT" || entry == "NO")</span>
-                        {
-                        <br> rl.close();
-                        <br>
-                        <span class="caption">// Note: our program will not exit until close() is called <br></span>
-                        }
-                    </p>
-                    <h4 style='font-family: BenchNine' sans-serif;'> Line Event:</h4>
-                    The 'line' envent is emitted whenever the in stream receives a <em style='font-family: Oxygen Mono, monospace;'>\n
-                    </em>, usually received when the user hits enter, or return.
-                    <p class="caption">If you would like to know more about the readline module, stay-tuned. I am
-                        working on a blog post in which I show you how to
-                        make a <em>'Polish Notation'</em> calculator with the readline module.
-                    </p>
+                       <p>So that's all it takes to write a simple Q & A program in Node! Check out my next blog post where we'll disucss 
+                           other ways we can work with processes. 
+                       </p>
                 </div>
             </div>
         </div>
